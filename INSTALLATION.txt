@@ -1,0 +1,35 @@
+# Use this code in your existing folder
+
+The ZIP contains a complete baseline Python package. Since you already have files in:
+`D:\Git_Projects\Python-Projects\Data_Science\Numpy\Matrix_Operations_Library`
+
+do not blindly overwrite your existing work. First compare the files, especially `matrix.py`, `__init__.py`, `pyproject.toml`, and tests. If your existing code is already useful, merge the implementation rather than deleting your work.
+
+## CMD commands
+
+Open CMD in the existing project root and install:
+
+```cmd
+.venv\Scripts\python.exe -m pip install -e ".[dev,web]"
+```
+
+If your `.venv` does not exist:
+
+```cmd
+py -m venv .venv
+.venv\Scripts\python.exe -m pip install -e ".[dev,web]"
+```
+
+Run tests:
+
+```cmd
+.venv\Scripts\python.exe -m pytest
+```
+
+Run example:
+
+```cmd
+.venv\Scripts\python.exe examples\basic_usage.py
+```
+
+This baseline supplies the core logic. It does not yet include the FastAPI adapter file; we should add that only after confirming this core package imports and tests pass.
