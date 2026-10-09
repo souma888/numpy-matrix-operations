@@ -181,7 +181,7 @@ A @ B   # [[19, 22], [43, 50]]: row-by-column matrix product
 - Eigenvalues and eigenvectors may be complex even when the input matrix is real.
 - The pseudoinverse is useful for rectangular or rank-deficient matrices and least-squares problems.
 
-See [Mathematical Foundations](docs/mathematics.md) and [User Guide](docs/user-guide.md) for longer explanations.
+See [Mathematical Foundations](docs/mathematics.md), [User Guide](docs/user-guide.md), [Architecture](docs/architecture.md), and the [HTTP API Reference](docs/api.md) for longer explanations.
 
 ## Jupyter notebooks
 
