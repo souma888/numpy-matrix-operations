@@ -1,12 +1,12 @@
 """Integration tests for the optional FastAPI adapter."""
+import importlib
+
 import pytest
 
 pytest.importorskip("fastapi")
 pytest.importorskip("httpx")
-from fastapi.testclient import TestClient
-
-from matrixlib.api import app
-
+TestClient = importlib.import_module("fastapi.testclient").TestClient
+app = importlib.import_module("matrixlib.api").app
 client = TestClient(app)
 
 
