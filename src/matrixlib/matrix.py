@@ -18,8 +18,13 @@ class Matrix:
 
     def __init__(self, values: ArrayLike):
         try:
-            array = np.asarray(values, dtype=np.float64)
+            raw = np.asarray(values)
+            if np.iscomplexobj(raw):
+                raise ValueError("Complex matrix values are not supported; provide real numbers.")
+            array = np.asarray(raw, dtype=np.float64)
         except (TypeError, ValueError) as exc:
+            if isinstance(exc, ValueError) and "Complex matrix values" in str(exc):
+                raise
             raise ValueError("Matrix values must form a rectangular numeric array.") from exc
 
         if array.ndim != 2:
@@ -72,8 +77,13 @@ class Matrix:
         if isinstance(other, Matrix):
             return other._data
         try:
-            array = np.asarray(other, dtype=np.float64)
+            raw = np.asarray(other)
+            if np.iscomplexobj(raw):
+                raise ValueError("Complex matrix values are not supported; provide real numbers.")
+            array = np.asarray(raw, dtype=np.float64)
         except (TypeError, ValueError) as exc:
+            if isinstance(exc, ValueError) and "Complex matrix values" in str(exc):
+                raise
             raise ValueError("The other operand must be a rectangular numeric matrix.") from exc
         if array.ndim != 2:
             raise ValueError("The other operand must be a two-dimensional matrix.")
@@ -190,8 +200,13 @@ class Matrix:
         """Solve Ax=b for square A; b may be a vector or multiple RHS columns."""
         self._require_square("solve")
         try:
-            vector = np.asarray(b, dtype=np.float64)
+            raw = np.asarray(b)
+            if np.iscomplexobj(raw):
+                raise ValueError("b must contain real numeric values.")
+            vector = np.asarray(raw, dtype=np.float64)
         except (TypeError, ValueError) as exc:
+            if isinstance(exc, ValueError) and "real numeric values" in str(exc):
+                raise
             raise ValueError("b must contain numeric values.") from exc
         if vector.ndim not in (1, 2):
             raise ValueError("b must be a vector or a two-dimensional array.")
