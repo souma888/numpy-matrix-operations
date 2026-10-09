@@ -136,3 +136,12 @@ def test_symmetric_check():
     assert Matrix([[1, 2], [2, 3]]).is_symmetric()
     assert not Matrix([[1, 2], [3, 4]]).is_symmetric()
     assert not Matrix([[1, 2, 3], [4, 5, 6]]).is_symmetric()
+
+
+def test_rejects_complex_input_instead_of_discarding_imaginary_parts():
+    with pytest.raises(ValueError, match="Complex matrix values"):
+        Matrix([[1 + 2j]])
+    with pytest.raises(ValueError, match="Complex matrix values"):
+        Matrix([[1, 2]]) + np.array([[1 + 1j, 2]])
+    with pytest.raises(ValueError, match="real numeric values"):
+        Matrix([[1, 0], [0, 1]]).solve([1 + 2j, 0])
